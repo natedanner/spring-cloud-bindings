@@ -58,7 +58,7 @@ final class PemCertificateParser {
 		CertificateFactory factory = getCertificateFactory();
 		List<X509Certificate> certs = new ArrayList<>();
 		readCertificates(certificates, factory, certs::add);
-		return (!certs.isEmpty()) ? certs.stream().toArray(X509Certificate[]::new) : null;
+		return !certs.isEmpty() ? certs.stream().toArray(X509Certificate[]::new) : null;
 	}
 
 	private static CertificateFactory getCertificateFactory() {

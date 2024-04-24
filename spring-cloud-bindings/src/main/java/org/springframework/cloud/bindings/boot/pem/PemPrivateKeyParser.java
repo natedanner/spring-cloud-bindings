@@ -147,7 +147,7 @@ final class PemPrivateKeyParser {
 
 		PrivateKey parse(String text) {
 			Matcher matcher = this.pattern.matcher(text);
-			return (!matcher.find()) ? null : parse(decodeBase64(matcher.group(1)));
+			return !matcher.find() ? null : parse(decodeBase64(matcher.group(1)));
 		}
 
 		private static byte[] decodeBase64(String content) {
@@ -176,7 +176,7 @@ final class PemPrivateKeyParser {
 		private final ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
 		void objectIdentifier(int... encodedObjectIdentifier) throws IOException {
-			int code = (encodedObjectIdentifier != null) ? 0x06 : 0x05;
+			int code = encodedObjectIdentifier != null ? 0x06 : 0x05;
 			codeLengthBytes(code, bytes(encodedObjectIdentifier));
 		}
 
@@ -198,7 +198,7 @@ final class PemPrivateKeyParser {
 
 		void codeLengthBytes(int code, byte[] bytes) throws IOException {
 			this.stream.write(code);
-			int length = (bytes != null) ? bytes.length : 0;
+			int length = bytes != null ? bytes.length : 0;
 			if (length <= 127) {
 				this.stream.write(length & 0xFF);
 			}

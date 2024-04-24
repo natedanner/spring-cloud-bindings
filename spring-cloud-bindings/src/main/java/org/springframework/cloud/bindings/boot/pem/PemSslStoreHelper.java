@@ -101,7 +101,7 @@ public class PemSslStoreHelper {
 
 	private static void addCertificates(KeyStore keyStore, X509Certificate[] certificates, PrivateKey privateKey, String keyAlias)
 			throws KeyStoreException {
-		String alias = (keyAlias != null) ? keyAlias : DEFAULT_KEY_ALIAS;
+		String alias = keyAlias != null ? keyAlias : DEFAULT_KEY_ALIAS;
 		if (privateKey != null) {
 			keyStore.setKeyEntry(alias, privateKey, null, certificates);
 		}

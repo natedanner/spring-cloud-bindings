@@ -70,11 +70,10 @@ public final class BindingFlattenedEnvironmentPostProcessor implements Applicati
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         Map<String, Object> properties = new HashMap<>();
-        bindings.getBindings().forEach(binding -> {
+        bindings.getBindings().forEach(binding ->
             binding.getSecret().forEach((key, value) -> {
                 properties.put(String.format("k8s.bindings.%s.%s", binding.getName(), key), value);
-            });
-        });
+            }));
 
         if (properties.isEmpty()) {
             log.debug("No properties set from Kubernetes Service Bindings. Skipping PropertySource creation.");

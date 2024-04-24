@@ -117,7 +117,7 @@ final class MapMapper {
         }
     }
 
-    final static class NoopSource implements Source {
+    static final class NoopSource implements Source {
 
         @Override
         public void to(String key) {

@@ -193,8 +193,12 @@ public final class Binding {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Binding binding = (Binding) o;
         return name.equals(binding.name) &&
                 path.equals(binding.path) &&
