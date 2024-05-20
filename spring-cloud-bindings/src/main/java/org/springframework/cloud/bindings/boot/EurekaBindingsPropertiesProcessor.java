@@ -49,7 +49,7 @@ final class EurekaBindingsPropertiesProcessor implements BindingsPropertiesProce
             map.from("client-id").to("eureka.client.oauth2.client-id");
             map.from("access-token-uri").to("eureka.client.oauth2.access-token-uri");
             map.from("uri").to("eureka.client.serviceUrl.defaultZone",
-                    (uri) -> String.format("%s/eureka/", uri)
+                    uri -> String.format("%s/eureka/", uri)
             );
             properties.put("eureka.client.region", "default");
 

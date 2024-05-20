@@ -112,14 +112,14 @@ public final class PostgreSqlBindingsPropertiesProcessor implements BindingsProp
         String options = binding.getSecret().getOrDefault(OPTIONS, "");
         String crdbOption = "";
         List<String> dbOptions = new ArrayList<>();
-        if (!options.equals("")) {
+        if (!"".equals(options)) {
             String[] allOpts = options.split("&");
             for (String o : allOpts) {
                 String[] keyval = o.split("=");
                 if (keyval.length != 2 || keyval[0].length() == 0 || keyval[1].length() == 0) {
                     continue;
                 }
-                if (keyval[0].equals("--cluster")) {
+                if ("--cluster".equals(keyval[0])) {
                     crdbOption = keyval[0] + "=" + keyval[1];
                 } else {
                     dbOptions.add("-c " + keyval[0] + "=" + keyval[1]);
@@ -127,9 +127,9 @@ public final class PostgreSqlBindingsPropertiesProcessor implements BindingsProp
             }
         }
         String combinedOptions = crdbOption;
-        if (dbOptions.size() > 0) {
+        if (!dbOptions.isEmpty()) {
             String otherOpts = String.join(" ", dbOptions);
-            if (!combinedOptions.equals("")) {
+            if (!"".equals(combinedOptions)) {
                 combinedOptions = combinedOptions + " " + otherOpts;
             } else {
                 combinedOptions = otherOpts;
